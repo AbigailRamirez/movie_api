@@ -16,6 +16,141 @@
         </h4> 
         <h3>How to use (Instructions & Tutorial)</h3>
         <p>placeholder...</p>
+
+
+
+        <table>
+          <thead>
+            <tr>
+              <th>Business Logic</th>
+              <th>URL</th>
+              <th>HTTP Method</th>
+              <th>Request Body Data Format</th>
+              <th>Response Body Data Format</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>Get list of all movies to the user</td>
+              <td>/movies</td>
+              <td>GET</td>
+              <td>None</td>
+              <td>A JSON object holding information about all movies.</td>
+            </tr>
+
+            <tr>
+              <td>Get data (description, genre, director, image URL) about a single movie by title.</td>
+              <td>/movies/:title</td>
+              <td>GET</td>
+              <td>None</td>
+              <td>A JSON object holding information about a single movie.<br>
+                  Example: <br>
+                  {<br>
+                    "Title": "Ant-Man And The Wasp - Quantumania",<br>
+                    "Description": "Ant-Man and the Wasp find themselves exploring the Quantum Realm, interacting with strange new creatures and embarking on an adventure that pushes them beyond the limits of what they thought was possible.",<br>
+                    "Genre": {
+                      "Name": "Action",<br>
+                      "Description":"Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats.",<br>
+                    },<br>
+                    "Director": {<br>
+                      "Name": "Peyton Reed",<br>
+                      "Bio": "Peyton Tucker Reed is an American television and film director. He directed the comedy films Bring It On, Down with Love, The Break-Up, and Yes Man, as well as the superhero film Ant-Man and its sequels.",<br>
+                      "Birth":1964<br>
+                    },<br>
+                    "ImageURL": "https://www.hollywoodreporter.com/wp-content/uploads/2015/10/ap_935263600928.jpg?w=3000",<br>
+                    "Featured":true
+                  <br>}
+              </td>
+            </tr>
+
+            <tr>
+              <td>Return data about a genre (description) by name/title</td>
+              <td>/movies/genres/:genreName</td>
+              <td>GET</td>
+              <td>None</td>
+              <td>A JSON object holding information about the requested genre.<br>
+                  As such:<br>
+                  {<br>
+                    "Name": "Action",<br>
+                    "Description":"Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats.",
+                  <br>}
+              </td>
+            </tr>
+
+            <tr>
+              <td>Return data about a director (bio, birth year, etc.) by name.</td>
+              <td>/movies/directors/:directorName</td>
+              <td>GET</td>
+              <td>None</td>
+              <td>A JSON object holding information about the requested director.<br>
+                  Example:<br>
+                  {<br>
+                    "Name": "Peyton Reed",<br>
+                    "Bio": "Peyton Tucker Reed is an American television and film director. He directed the comedy films Bring It On, Down with Love, The Break-Up, and Yes Man, as well as the superhero film Ant-Man and its sequels.",<br>
+                    "Birth":1964
+                  <br>}
+              </td>
+            </tr>
+
+            <tr>
+              <td>Allow a new user to register.</td>
+              <td>/users</td>
+              <td>POST</td>
+              <td>A JSON object holding data about the user to add.<br>
+                  Example:<br>
+                  {<br>
+                    "username": "username1",<br>
+                    "movieList": []
+                  <br>}
+              </td>
+              <td>A JSON object contaitning data about the new user. Including an id.<br>
+                  Example:<br>
+                  {<br>
+                    "id": 1,<br>
+                    "username": "username1",<br>
+                    "favoriteMovies": []
+                  <br>}
+              </td>
+            </tr>
+
+            <tr>
+              <td>Allow users to update their information</td>
+              <td>/users/:id</td>
+              <td>PUT</td>
+              <td>:id</td>
+              <td>A JSON object containing the updated user information.</td>
+            </tr>
+
+            <tr>
+              <td>Allow user to add a movie to their favorites</td>
+              <td>/users/:id/:movieTitle</td>
+              <td>POST</td>
+              <td>:id/:movieTitle</td>
+              <td>A text message indicating that the movie has successfully been added to the users favorite movies list.</td>
+            </tr>
+
+            <tr>
+              <td>Allow users to remove a movie from their favourites.</td>
+              <td>/users/:id/:movieTitle</td>
+              <td>DELETE</td>
+              <td>:id</td>
+              <td>A text message indicating that the movie has successfully been removed from the favorite movies list</td>
+            </tr>
+
+            <tr>
+              <td>Allow existing users to deregister</td>
+              <td>/users/:id</td>
+              <td>DELETE</td>
+              <td>:id</td>
+              <td>A text message indicating that the user has successfully been removed/deregistered</td>
+
+            </tr>
+
+
+          </tbody>
+        </table>
     </main>
 	<!--<script src="#"></script>-->
   </body>
