@@ -23,9 +23,7 @@ app.use(morgan('common'));
 //app.use(morgan('common', {stream: accessLogStream}));
 
 
-//READ Endpoints
-
-//GET requests
+//READ Endpoints/GET requests
 
 app.get('/', (req, res) => {
   res.send('Welcome to my movie club!');
@@ -173,7 +171,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 });
 
 
-//UPDATE Endpoint
+//UPDATE Endpoint/ Put Endpoint
 
 // Update a user's info, by username
 /* We’ll expect JSON in this format
