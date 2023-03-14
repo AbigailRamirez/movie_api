@@ -10,147 +10,129 @@
   </head>
   <body>
     <main>
-        <h1>MyFlix API DOCUMENTATION</h1>
-        <h4>
-            A REST API that interacts with a database that stores data about different movies.
-        </h4> 
-        <h3>How to use (Instructions & Tutorial)</h3>
-        <p>placeholder...</p>
+      <div>
+        <h1>MyFlix Movie API Documentation</h1>
+        <h2>Objective</h2>
+            <p>To build the server-side component of a “Movies” web application using Node JS. 
+            The web application will provide users with access to information about different
+            movies, directors, and genres. Users will be able to sign up, update their
+            personal information, and create a list of their favorite movies.</p>
+
+        <h2>Features</h2>
+        <ul>
+            <li>Return a list of ALL movies to the user</li>
+            <li>Return data (description, genre, director, image URL, whether it's featured or not) about a single movie by title to the user</li>
+            <li>Return data about a genre (description) by name/title</li>
+            <li>Return data about a director (bio, birth year, death year) by name</li>
+            <li>Allow new users to register</li>
+            <li>Allow users to update their user info</li>
+            <li>Allow users to add a movie to their list of favorites</li>
+            <li>Allow users to remove a movie from their list of favorites</li>
+            <li>Allow existing users to deregister.</li>
+        </ul>
+      </div>
+
+      <h2>API Endpoint Documentation</h2>
 
 
 
-        <table>
-          <thead>
-            <tr>
+      <table>
+        <thead>
+          <tr>
               <th>Business Logic</th>
               <th>URL</th>
               <th>HTTP Method</th>
+              <th>Query Parameters</th>
               <th>Request Body Data Format</th>
               <th>Response Body Data Format</th>
-            </tr>
-          </thead>
+          </tr>
+        </thead>
 
-          <tbody>
+        <tbody>   
+        <tr>
+            <td>Returns a list of all movies</td>
+            <td>/movies</td>
+            <td>GET</td>
+            <td>-</td>
+            <td>-</td>
+            <td>A JSON object holding data about all the movies</td>
+        </tr>
 
-            <tr>
-              <td>Get list of all movies to the user</td>
-              <td>/movies</td>
-              <td>GET</td>
-              <td>None</td>
-              <td>A JSON object holding information about all movies.</td>
-            </tr>
+        <tr>
+          <td>Returns data about single movie by title</td>
+          <td>/movies/:Title</td>
+          <td>GET</td>
+          <td>:title</td>
+          <td>-</td>
+          <td>A JSON object holding data about a single movie</td>
+        </tr>
 
-            <tr>
-              <td>Get data (description, genre, director, image URL) about a single movie by title.</td>
-              <td>/movies/:title</td>
-              <td>GET</td>
-              <td>None</td>
-              <td>A JSON object holding information about a single movie.<br>
-                  Example: <br>
-                  {<br>
-                    "Title": "Ant-Man And The Wasp - Quantumania",<br>
-                    "Description": "Ant-Man and the Wasp find themselves exploring the Quantum Realm, interacting with strange new creatures and embarking on an adventure that pushes them beyond the limits of what they thought was possible.",<br>
-                    "Genre": {
-                      "Name": "Action",<br>
-                      "Description":"Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats.",<br>
-                    },<br>
-                    "Director": {<br>
-                      "Name": "Peyton Reed",<br>
-                      "Bio": "Peyton Tucker Reed is an American television and film director. He directed the comedy films Bring It On, Down with Love, The Break-Up, and Yes Man, as well as the superhero film Ant-Man and its sequels.",<br>
-                      "Birth":1964<br>
-                    },<br>
-                    "ImageURL": "https://www.hollywoodreporter.com/wp-content/uploads/2015/10/ap_935263600928.jpg?w=3000",<br>
-                    "Featured":true
-                  <br>}
-              </td>
-            </tr>
+        <tr>
+          <td>Returns data about a genre by title</td>
+          <td>/movies/genre/:genreName</td>
+          <td>GET</td>
+          <td>:genreName</td>
+          <td>-</td>
+          <td>A JSON object holding data about a specific genre of movie</td>
+        </tr>
 
-            <tr>
-              <td>Return data about a genre (description) by name/title</td>
-              <td>/movies/genres/:genreName</td>
-              <td>GET</td>
-              <td>None</td>
-              <td>A JSON object holding information about the requested genre.<br>
-                  As such:<br>
-                  {<br>
-                    "Name": "Action",<br>
-                    "Description":"Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats.",
-                  <br>}
-              </td>
-            </tr>
+        <tr>
+          <td>Returns data about a director by name</td>
+          <td>/movies/directors/:directorName</td>
+          <td>GET</td>
+          <td>:directorName</td>
+          <td>-</td>
+          <td>A JSON object holding data about a specific director</td>
+        </tr>
 
-            <tr>
-              <td>Return data about a director (bio, birth year, etc.) by name.</td>
-              <td>/movies/directors/:directorName</td>
-              <td>GET</td>
-              <td>None</td>
-              <td>A JSON object holding information about the requested director.<br>
-                  Example:<br>
-                  {<br>
-                    "Name": "Peyton Reed",<br>
-                    "Bio": "Peyton Tucker Reed is an American television and film director. He directed the comedy films Bring It On, Down with Love, The Break-Up, and Yes Man, as well as the superhero film Ant-Man and its sequels.",<br>
-                    "Birth":1964
-                  <br>}
-              </td>
-            </tr>
+        <tr>
+          <td>Allows new users to register</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>-</td>
+          <td>A JSON object holding data about the users to add, structured like this:
+              { "Username": "String","Password": "String","Email": "String","Birthday": "Date"}</td>
+              <td>A JSON object holding data about the user that was added, structured like this 
+              { "username" : "Test1", "Password": "1234", "Email": "testtest@gmail.com", "Birthday": "1988-08-08", "favorite movie" : [] } including an ID </td>
+        </tr>
 
-            <tr>
-              <td>Allow a new user to register.</td>
-              <td>/users</td>
-              <td>POST</td>
-              <td>A JSON object holding data about the user to add.<br>
-                  Example:<br>
-                  {<br>
-                    "username": "username1",<br>
-                    "movieList": []
-                  <br>}
-              </td>
-              <td>A JSON object contaitning data about the new user. Including an id.<br>
-                  Example:<br>
-                  {<br>
-                    "id": 1,<br>
-                    "username": "username1",<br>
-                    "favoriteMovies": []
-                  <br>}
-              </td>
-            </tr>
+        <tr>
+          <td>Allows users to update their user info</td>
+          <td>/users/:Username</td>
+          <td>PUT</td>
+          <td>:Username</td>
+          <td>-</td>
+          <td>A JSON object holding data about the updated user information</td>
+        </tr>
 
-            <tr>
-              <td>Allow users to update their information</td>
-              <td>/users/:id</td>
-              <td>PUT</td>
-              <td>:id</td>
-              <td>A JSON object containing the updated user information.</td>
-            </tr>
+        <tr>
+          <td>Allows users to add a movie to their favourites</td>
+          <td>/users/:Username/movies/:MovieID</td>
+          <td>POST</td>
+          <td>:Username,:MovieID</td>
+          <td>-</td>
+          <td>A JSON object holding data about the user and the movie that was added</td>
+        </tr>
 
-            <tr>
-              <td>Allow user to add a movie to their favorites</td>
-              <td>/users/:id/:movieTitle</td>
-              <td>POST</td>
-              <td>:id/:movieTitle</td>
-              <td>A text message indicating that the movie has successfully been added to the users favorite movies list.</td>
-            </tr>
+        <tr>
+          <td>Allows users to remove a movie from their favourites</td>
+          <td>/users/:Username/movies/:MovieID</td>
+          <td>DELETE</td>
+          <td>:Username,:MovieID</td>
+          <td>-</td>
+          <td>A JSON object holding data about the user and the movie that was removed</td>
+        </tr>
 
-            <tr>
-              <td>Allow users to remove a movie from their favourites.</td>
-              <td>/users/:id/:movieTitle</td>
-              <td>DELETE</td>
-              <td>:id</td>
-              <td>A text message indicating that the movie has successfully been removed from the favorite movies list</td>
-            </tr>
-
-            <tr>
-              <td>Allow existing users to deregister</td>
-              <td>/users/:id</td>
-              <td>DELETE</td>
-              <td>:id</td>
-              <td>A text message indicating that the user has successfully been removed/deregistered</td>
-
-            </tr>
-
-
-          </tbody>
-        </table>
+        <tr>
+          <td>Allows existing users to deregister</td>
+          <td>/users/:Username</td>
+          <td>DELETE</td>
+          <td>-</td>
+          <td>-</td>
+          <td>A text message indicating whether the user has successfully deregistered</td>
+        </tr>
+        </tbody>
+      </table>
     </main>
 	<!--<script src="#"></script>-->
   </body>
