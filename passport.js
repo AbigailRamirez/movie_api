@@ -16,14 +16,16 @@ passport.use(new LocalStrategy({
     .then((user) => {
         if(!user){
             console.log('incorrect username');
-            return Promise.reject({message: 'Incorrect username or password'});
+            return callback(null, false, {
+                message: 'Incorrect username or password'
+            });
         }
         console.log('finished');
-        return Promise.resolve(user);
+        return callback(null, user);
     })
     .catch((error) => {
         console.log(error);
-        return Promise.reject(error);
+        return callback(error);
     });
 }));
 
