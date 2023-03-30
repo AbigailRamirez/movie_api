@@ -18,7 +18,7 @@ mongoose.connect( process.env.CONNECTION_URI , { useNewUrlParser: true, useUnifi
 
 
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
+//const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -74,7 +74,7 @@ app.get(
 //GET ALL movie data
 app.get(
   '/movies',
-  passport.authenticate('jwt', { session: false }),
+  //passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => {
