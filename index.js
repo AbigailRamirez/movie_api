@@ -4,6 +4,7 @@ const app = express();
 const uuid = require('uuid');
 const morgan = require('morgan');
 const fs = require('fs');
+const path = require('path');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const cors = require('cors');
@@ -18,14 +19,12 @@ mongoose.connect( process.env.CONNECTION_URI , { useNewUrlParser: true, useUnifi
 
 
 
-//const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(morgan('common'));
-
-//app.use(morgan('common', {stream: accessLogStream}));
+app.use(morgan('common', {stream: accessLogStream}));
 
 let auth = require('./auth')(app);
 const passport = require('passport');
