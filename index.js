@@ -1,15 +1,39 @@
+// Parsing incoming requests
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const uuid = require('uuid');
+
+/**
+ * Morgan is a HTTP request logger middleware for Node.js.
+ * https://www.npmjs.com/package/morgan
+ */
+// Logging requests
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+
+// CORS middleware
+/**
+ * CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+ * https://www.npmjs.com/package/cors
+ */
+
 const cors = require('cors');
+
+// Input validation
 const { check, validationResult } = require('express-validator');
 
+/**
+ * Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
+ * https://www.npmjs.com/package/mongoose
+ * https://mongoosejs.com/
+ * https://mongoosejs.com/docs/guide.html
+ * https://mongoosejs.com/docs/api.html
+ */
+// Integrating Mongoose and connecting to MongoDB
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -23,12 +47,16 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {f
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+//Routing of static files (e.g. documentation.html)
 app.use(express.static('public'));
 app.use(morgan('common', {stream: accessLogStream}));
 
+// Authentication (auth.js is handling login endpoint and generating JWT tokens)
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
+
+//------------------ Endpoint handlers ------------------//
 
 //READ Endpoints/GET requests
 
@@ -70,6 +98,13 @@ app.get(
       });
   });
 
+/**
+ * Returns a list of all users
+ * @method GET
+ * @param {string} endpoint - /users
+ * @param {function} callback - function(req, res)
+ * @returns {object} - JSON object containing all users
+ */
 //GET ALL movie data
 app.get(
   '/movies',
